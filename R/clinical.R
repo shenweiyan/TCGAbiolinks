@@ -187,7 +187,7 @@ TCGAquery_MatchedCoupledSampleTypes <- function(barcode,typesample){
 GDCquery_clinic <- function(project, type = "clinical", save.csv = FALSE){
     checkProjectInput(project)
     if(!grepl("clinical|Biospecimen",type,ignore.case = TRUE)) stop("Type must be clinical or biospecemen")
-    baseURL <- "https://api.gdc.cancer.gov/cases/?"
+    baseURL <- "http://api.gdc.cancer.gov/cases/?"
     options.pretty <- "pretty=true"
     if(grepl("clinical",type,ignore.case = TRUE)) {
         options.expand <- "expand=diagnoses,diagnoses.treatments,annotations,family_histories,demographic,exposures"
@@ -271,7 +271,7 @@ GDCquery_clinic <- function(project, type = "clinical", save.csv = FALSE){
             # Although for TCGA and TARGET IDs from diagnosis, treatments, exposures etc are the same
             # for the other projects this might not be true!
             # example: ORGANOID-PANCREATIC
-            # https://api.gdc.cancer.gov/cases/?pretty=true&expand=diagnoses,demographic&size=1&filters=%7B%22op%22:%22in%22,%22content%22:%7B%22field%22:%22cases.project.project_id%22,%22value%22:[%22ORGANOID-PANCREATIC%22]%7D%7D&format=json
+            # http://api.gdc.cancer.gov/cases/?pretty=true&expand=diagnoses,demographic&size=1&filters=%7B%22op%22:%22in%22,%22content%22:%7B%22field%22:%22cases.project.project_id%22,%22value%22:[%22ORGANOID-PANCREATIC%22]%7D%7D&format=json
             # DEMOGRAPHIC 48, while everything else is 42
             df <- data.frame("submitter_id" = results$submitter_id)
 

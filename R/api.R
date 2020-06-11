@@ -47,7 +47,7 @@ getSampleFilesSummary <- function(project, legacy = FALSE, files.access = NA) {
 
 getSampleSummaryUrl <- function(project,legacy = FALSE, files.access = NA){
     # Get manifest using the API
-    baseURL <- ifelse(legacy,"https://api.gdc.cancer.gov/legacy/cases/?","https://api.gdc.cancer.gov/cases/?")
+    baseURL <- ifelse(legacy,"http://api.gdc.cancer.gov/legacy/cases/?","http://api.gdc.cancer.gov/cases/?")
 
     options.pretty <- "pretty=true"
     options.expand <- "expand=summary,summary.data_categories,files"
@@ -79,7 +79,7 @@ getSampleSummaryUrl <- function(project,legacy = FALSE, files.access = NA){
 
 getSubmitterIDUrl <- function(project,legacy = FALSE, files.access = NA){
     # Get manifest using the API
-    baseURL <- ifelse(legacy,"https://api.gdc.cancer.gov/legacy/cases/?","https://api.gdc.cancer.gov/cases/?")
+    baseURL <- ifelse(legacy,"http://api.gdc.cancer.gov/legacy/cases/?","http://api.gdc.cancer.gov/cases/?")
 
     options.pretty <- "pretty=true"
     options.expand <- "expand=files.access"
@@ -132,7 +132,7 @@ getSubmitterID <- function(project,legacy = FALSE, files.access = NA){
 # getBarcodefromAliquot(c("4e06e279-5f0d-4bf5-8659-67b8069050b8","bb6e1801-b08a-49b1-bc4b-205fdefb035b"))
 #' @importFrom dplyr bind_rows
 getBarcodefromAliquot <- function(aliquot){
-    baseURL <- "https://api.gdc.cancer.gov/cases/?"
+    baseURL <- "http://api.gdc.cancer.gov/cases/?"
     options.fields <- "fields=samples.portions.analytes.aliquots.aliquot_id,samples.portions.analytes.aliquots.submitter_id"
     options.pretty <- "pretty=true"
     option.size <- paste0("size=",length(aliquot))
@@ -225,7 +225,7 @@ splitAPICall <- function(FUN, step = 20, items){
 #' @examples
 #' summary <- getDataCategorySummary("TCGA-ACC", legacy = TRUE)
 getDataCategorySummary <- function(project, legacy = FALSE){
-    baseURL <- ifelse(legacy,"https://api.gdc.cancer.gov/legacy/files/?","https://api.gdc.cancer.gov/files/?")
+    baseURL <- ifelse(legacy,"http://api.gdc.cancer.gov/legacy/files/?","http://api.gdc.cancer.gov/files/?")
     url <- paste0(baseURL,"&expand=cases&size=100000&fields=cases.submitter_id,data_category&filters=",
                   URLencode('{"op":"and","content":[{"op":"in","content":{"field":"cases.project.project_id","value":["'),
                   URLencode(project),
@@ -255,7 +255,7 @@ getDataCategorySummary <- function(project, legacy = FALSE){
 #' getProjectSummary("CPTAC-2")
 #' }
 getProjectSummary <- function(project, legacy = FALSE){
-    baseURL <- ifelse(legacy,"https://api.gdc.cancer.gov/legacy/projects/","https://api.gdc.cancer.gov/projects/")
+    baseURL <- ifelse(legacy,"http://api.gdc.cancer.gov/legacy/projects/","http://api.gdc.cancer.gov/projects/")
     url <- paste0(baseURL, project,"?expand=summary,summary.data_categories&pretty=true")
     return(fromJSON(url,simplifyDataFrame = TRUE)$data$summary)
 }

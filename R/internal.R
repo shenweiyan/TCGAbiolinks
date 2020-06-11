@@ -22,7 +22,7 @@
 #' @title Check GDC server status is OK
 #' @description
 #'   Check GDC server status using the api
-#'   https://api.gdc.cancer.gov/status
+#'   http://api.gdc.cancer.gov/status
 #' @export
 #' @importFrom jsonlite fromJSON
 #' @examples
@@ -39,14 +39,14 @@ isServeOK <- function(){
 #' @title Check GDC server status
 #' @description
 #'   Check GDC server status using the api
-#'   https://api.gdc.cancer.gov/status
+#'   http://api.gdc.cancer.gov/status
 #' @export
 #' @importFrom jsonlite fromJSON
 #' @examples
 #' info <- getGDCInfo()
 #' @return Return true all status
 getGDCInfo <- function(){
-    status <- fromJSON("https://api.gdc.cancer.gov/status",simplifyDataFrame = TRUE)
+    status <- fromJSON("http://api.gdc.cancer.gov/status",simplifyDataFrame = TRUE)
     return(status)
 }
 
@@ -175,14 +175,14 @@ checkBarcodeDefinition <- function(definition){
 #' @title Retrieve all GDC projects
 #' @description
 #'   getGDCprojects uses the following api to get projects
-#'   https://api.gdc.cancer.gov/projects
+#'   http://api.gdc.cancer.gov/projects
 #' @export
 #' @import readr stringr
 #' @examples
 #' projects <- getGDCprojects()
 #' @return A data frame with last GDC projects
 getGDCprojects <- function(){
-    url <- "https://api.gdc.cancer.gov/projects?size=1000&format=json"
+    url <- "http://api.gdc.cancer.gov/projects?size=1000&format=json"
     json <- fromJSON(content(GET(url), as = "text", encoding = "UTF-8"), simplifyDataFrame = TRUE)
     projects <- json$data$hits
     projects$tumor <- unlist(lapply(projects$project_id, function(x){unlist(str_split(x,"-"))[2]}))

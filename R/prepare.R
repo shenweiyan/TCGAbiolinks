@@ -1223,7 +1223,7 @@ addFFPE <- function(df) {
 #' @importFrom plyr rbind.fill
 #' @importFrom httr content
 getFFPE <- function(patient){
-  baseURL <- "https://api.gdc.cancer.gov/cases/?"
+  baseURL <- "http://api.gdc.cancer.gov/cases/?"
   options.pretty <- "pretty=true"
   options.expand <- "expand=samples"
   option.size <- paste0("size=",length(patient))
@@ -1248,7 +1248,7 @@ getFFPE <- function(patient){
 }
 
 getAliquot_ids <- function(barcode){
-  baseURL <- "https://api.gdc.cancer.gov/cases/?"
+  baseURL <- "http://api.gdc.cancer.gov/cases/?"
   options.fields <- "fields=samples.portions.analytes.aliquots.aliquot_id,samples.portions.analytes.aliquots.submitter_id"
   options.pretty <- "pretty=true"
   option.size <- paste0("size=",length(barcode))
@@ -1284,7 +1284,7 @@ getAliquot_ids <- function(barcode){
 #' @importFrom dplyr bind_cols slice row_number
 #'
 getBarcodeInfo <- function(barcode) {
-  baseURL <- "https://api.gdc.cancer.gov/cases/?"
+  baseURL <- "http://api.gdc.cancer.gov/cases/?"
   options.pretty <- "pretty=true"
   options.expand <- "expand=samples,project,diagnoses,diagnoses.treatments,annotations,family_histories,demographic,exposures"
   option.size <- paste0("size=",length(barcode))

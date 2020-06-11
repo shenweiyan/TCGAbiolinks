@@ -11,7 +11,7 @@ Return true if status is ok
 }
 \description{
 Check GDC server status using the api
-  https://api.gdc.cancer.gov/status
+  http://api.gdc.cancer.gov/status
 }
 \examples{
 status <- isServeOK()
